@@ -36,7 +36,7 @@ public class Chambre implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     @JsonIgnore
 
-    private List<Reservation> Reservations;
+    private List<Reservation> reservations;
 // Constructeur et accesseurs (getters) et mutateurs (setters)
 
 }

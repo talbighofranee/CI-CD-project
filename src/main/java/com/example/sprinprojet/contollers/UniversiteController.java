@@ -23,21 +23,21 @@ public class UniversiteController {
     @Operation(description = "Get a list of all universities")
     @GetMapping("/retrieve-all-universities")
     public List<Universite> getUniversities() {
-        List<Universite> listUniversities = universiteService.retrieveAllUniversites();
-        return listUniversities;
+        return  universiteService.retrieveAllUniversites();
+
     }
 
     @Operation(description = "Get a university by ID")
     @GetMapping("/retrieve-university/{university-id}")
-    public Universite retrieveUniversite(@PathVariable("university-id") Long UniversityId) {
-        return universiteService.retrieveUniversites(UniversityId);
+    public Universite retrieveUniversite(@PathVariable("university-id") Long universityId) {
+        return universiteService.retrieveUniversites(universityId);
     }
 
     @Operation(description = "Add a new university")
     @PostMapping("/add-university")
     public Universite addUniversite(@RequestBody Universite e) {
-        Universite universite = universiteService.addUniversites(e);
-        return universite;
+     return universiteService.addUniversites(e);
+
     }
 
     @Operation(description = "Remove a university by ID")
@@ -49,22 +49,22 @@ public class UniversiteController {
     @Operation(description = "Update a university")
     @PutMapping("/update-university")
     public Universite updateUniversite(@RequestBody Universite u) {
-        Universite universite= universiteService.updateUniversites(u);
-        return universite;
+        return  universiteService.updateUniversites(u);
+
     }
 
     @Operation(description = "Set a foyer for a university")
     @PutMapping("/setfoyer/{idfoyer}/{nomuniversite}")
     public Universite setFoyer(@PathVariable ("idfoyer") Long foyerId,@PathVariable("nomuniversite") String nomUniversite) {
-        Universite universite = universiteService.affecterFoyerAUniversite(foyerId,nomUniversite);
-        return universite;
+        return universiteService.affecterFoyerAUniversite(foyerId,nomUniversite);
+
     }
 
     @Operation(description = "unSet a foyer for a university")
     @PutMapping("/unsetfoyer/{idfoyer}")
     public Universite unsetFoyer(@PathVariable ("idfoyer") Long foyerId) {
-        Universite universite = universiteService.desaffecterFoyerAUniversite(foyerId);
-        return universite;
+        return  universiteService.desaffecterFoyerAUniversite(foyerId);
+
     }
 
     @GetMapping("/rechercheParNom/{nomuniversite}")

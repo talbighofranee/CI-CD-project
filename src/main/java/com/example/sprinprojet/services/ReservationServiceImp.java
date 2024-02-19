@@ -45,13 +45,7 @@ public class ReservationServiceImp implements IReservationService {
         reservationRepository.deleteById(idReservation);
 
     }
-    public List<Reservation> getReservationParAnneeUniversitaire(Date dateDebut, Date dateFin )
-    {
 
-        List<Reservation> allReservations = reservationRepository.findByAnneeUniversitaireBetween(dateDebut,dateFin);
-        return allReservations;
-
-    }
     public boolean updateReservationStatus(String reservationId, Status newStatus) {
         Optional<Reservation> reservationOptional = reservationRepository.findById(reservationId);
 
@@ -78,7 +72,6 @@ public class ReservationServiceImp implements IReservationService {
             reservationRepository.save(reservation);
         }
     }
-    @Autowired
     private EmailService emailService;
 
     public String getStudentEmail(String reservationId) {

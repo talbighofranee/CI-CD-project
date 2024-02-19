@@ -25,14 +25,14 @@ public class BlocController {
 
     @GetMapping("/retrieve-all-blocs")
     public List<Bloc> getBlocList(){
-        List<Bloc>blocList=iBlocService.retrieveAllBlocs();
-        return blocList;
+        return iBlocService.retrieveAllBlocs();
+
     }
 
     @PostMapping("/add-bloc")
     public Bloc addBloc(@RequestBody Bloc b) {
-       Bloc bloc = iBlocService.addBloc(b);
-        return bloc;
+        return iBlocService.addBloc(b);
+
     }
     @GetMapping("/retrieve-bloc/{bloc-id}")
     public Bloc retrieveBloc(@PathVariable("bloc-id") Long idBloc ) {
@@ -47,8 +47,8 @@ public class BlocController {
     }
   @PutMapping("/update-bloc")
   public Bloc updateBloc(@RequestBody  Bloc b) {
-    Bloc bloc= iBlocService.updateBloc(b);
-    return bloc;
+      return iBlocService.updateBloc(b);
+
   }
 
     @Operation(summary = "Update Bloc", description = "Update an existing Bloc entity.")
@@ -70,10 +70,10 @@ public class BlocController {
         }
     }
   @PutMapping("/affecterChambresABloc/{numChambre}/{nomBloc}")
-  @ResponseBody
+
   public Bloc affecterChambresABloc(@PathVariable("numChambre") List<Long> numChambre, @PathVariable("nomBloc") String nomBloc) {
-    Bloc bloc = iBlocService.affecterChambresABloc(numChambre, nomBloc);
-    return bloc;
+      return iBlocService.affecterChambresABloc(numChambre, nomBloc);
+
   }
   @GetMapping("/sort-by-name")
   public List<Bloc> sortBlocsByName() {

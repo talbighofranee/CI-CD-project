@@ -14,7 +14,7 @@ public interface IUserService {
 
     List<User> retrieveAllUsers();
 
-    List addAllUsers(List<User> users);
+    List<User> addAllUsers(List<User> users);
 
     public byte[] generateQRCode(User user);
 

@@ -5,6 +5,7 @@ import com.example.sprinprojet.services.IUserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,19 +23,20 @@ import java.util.Map;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
     private UserRepository userRepository;
 
-    @Autowired
+
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
+
     IUserService iUserService;
 
-    @RequestMapping(value ="/add-user" ,method = RequestMethod.POST)
+    @PostMapping(value ="/add-user" )
     public User addUser(@RequestBody User user) {
         user.setMotdepasse(this.bCryptPasswordEncoder.encode(user.getMotdepasse()));
-        User savedUser = userRepository.save(user);
+
         return iUserService.addUser(user);
     }
 
@@ -73,21 +75,21 @@ public class UserController {
         return iUserService.retrieveUsers(userId);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE )
+    @DeleteMapping(value = "/{id}" )
     public void deleteUser(@PathVariable("id") long id){
         iUserService.deleteById(id);
     }
 
     @GetMapping("/retrieve-all-users")
     public List<User> getUserList(){
-        List<User>userList=iUserService.retrieveAllUsers();
-        return userList;
+        return iUserService.retrieveAllUsers();
+
     }
 
     @PostMapping("/add-all-users")
-    public List addAllUsers(@RequestBody List<User>users){
-        List Listuser=iUserService.addAllUsers(users);
-        return Listuser;
+    public List<User> addAllUsers(@RequestBody List<User>users){
+       return iUserService.addAllUsers(users);
+
     }
     @GetMapping("/retrieve-all")
     public ResponseEntity<List<User>> retrieveAllUsers() {
@@ -136,17 +138,17 @@ public class UserController {
     }
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> loginUser(@RequestBody User user) {
-        System.out.println("in login-user"+user);
+        log.info("in login-user"+user);
         HashMap<String, Object> response = new HashMap<>();
 
         User userFromDB = userRepository.findByEmail(user.getEmail());
-        System.out.println("userFromDB+user"+userFromDB);
+        log.info("userFromDB+user"+userFromDB);
         if (userFromDB == null) {
             response.put("message", "User not found !");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         } else {
             boolean compare = this.bCryptPasswordEncoder.matches(user.getMotdepasse(), userFromDB.getMotdepasse());
-            System.out.println("compare"+compare);
+            log.info("compare"+compare);
             if (!compare) {
                 response.put("message", "User not found !");
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
@@ -157,7 +159,8 @@ public class UserController {
                         .signWith(SignatureAlgorithm.HS256, "SECRET")
                         .compact();
                 response.put("token", token);
-                System.out.println("hhh");
+                log.info("hhh"); // or use other log levels like debug, warn, error, etc.
+
                 return ResponseEntity.status(HttpStatus.OK).body(response);
             }
 

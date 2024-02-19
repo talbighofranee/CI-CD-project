@@ -1,8 +1,8 @@
 package com.example.sprinprojet.entity;
 
 public enum Status {
-        Annulee,
-        Confirmee,
+        ANNULEE,
+        CONFIRME,
         NON_CONFIRMEE
 
 }

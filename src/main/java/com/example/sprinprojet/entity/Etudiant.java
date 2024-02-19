@@ -31,7 +31,7 @@ public class Etudiant implements Serializable {
 
     private String ecole;
 
-    private String StudentEmail;
+    private String studentEmail;
 
     @Temporal(TemporalType.DATE)
     private Date dateNaissance;

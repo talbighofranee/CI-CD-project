@@ -42,8 +42,7 @@ public class Reservation implements Serializable {
     @ManyToMany(mappedBy="reservations",cascade = CascadeType.ALL)
     private List<Etudiant> etudiants;
 
-    public void setEtudiantsReservation(Etudiant etudiant) {
-    }
+
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     private Chambre chambre;

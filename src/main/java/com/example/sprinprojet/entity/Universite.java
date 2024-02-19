@@ -26,5 +26,6 @@ public class Universite implements Serializable {
     @OneToOne(mappedBy = "universite")
     private Foyer foyer;
     public void setFoyUni(Foyer foyer) {
+        //vide
     }
 }

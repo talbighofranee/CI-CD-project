@@ -55,7 +55,7 @@ public class EtudiantServiceImp implements IEtudiantService{
 
 
 
-        List<Reservation> reservations =  new ArrayList<>() ;
+        List<Reservation> reservations ;
         reservations=etudiant.getReservations();
         reservations.add(reservation);
 

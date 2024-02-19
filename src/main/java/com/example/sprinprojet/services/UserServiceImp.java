@@ -71,7 +71,7 @@ public class UserServiceImp implements IUserService{
 
         } catch (WriterException | java.io.IOException e) {
             e.printStackTrace();
-            return null;
+            return new byte[0];
         }
     }
 

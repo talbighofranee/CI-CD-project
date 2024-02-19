@@ -7,6 +7,7 @@ import com.google.zxing.WriterException;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 public interface IChambreService {
   List<Chambre> retrieveAllChambres();
@@ -19,7 +20,7 @@ public interface IChambreService {
 
   void removeChambre(Long idChambre);
 
-  void pourcentageChambreParTypeChambre();
+  void pourcentageChambreParTypeChambre(Logger logger);
 
   byte[] generateQRCode(Chambre chambre) throws IOException, WriterException;
 

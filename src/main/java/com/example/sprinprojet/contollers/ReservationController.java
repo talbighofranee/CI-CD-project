@@ -24,14 +24,14 @@ public class ReservationController {
     @GetMapping("/retrieve-all-Reservations")
 
     public List<Reservation> getReservationList(){
-        List<Reservation>reservationList=iReservationService.retrieveAllReservations();
-        return reservationList;
+        return iReservationService.retrieveAllReservations();
+
     }
 
     @PostMapping("/add-Reservation")
     public Reservation addReservation(@RequestBody Reservation r) {
-        Reservation reservation = iReservationService.addReservation(r);
-        return reservation;
+        return iReservationService.addReservation(r);
+
     }
     @GetMapping("/retrieve-Reservation/{Reservation-id}")
     public Reservation retrieveReservation(@PathVariable("Reservation-id") String reservationId) {
@@ -43,8 +43,8 @@ public class ReservationController {
     }
     @PutMapping("/update-Reservation")
     public Reservation updateReservation(@RequestBody Reservation r) {
-        Reservation reservation= iReservationService.updateReservation(r);
-        return reservation;
+        return iReservationService.updateReservation(r);
+
     }
     @GetMapping("/getmail/{Reservation-id}")
     public String getMail(@PathVariable ("Reservation-id")String reservationid){

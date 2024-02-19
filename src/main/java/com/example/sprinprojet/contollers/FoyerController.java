@@ -29,8 +29,8 @@ public class FoyerController {
 
     @GetMapping("/retrieve-all-foyer")
     public List<Foyer> getFoyers() {
-        List<Foyer> listFoyers = foyerService.retrieveAllFoyers();
-        return listFoyers;
+        return foyerService.retrieveAllFoyers();
+
     }
 
     @GetMapping("/retrieve-foyer/{foyer-id}")
@@ -40,8 +40,8 @@ public class FoyerController {
 
     @PostMapping("/add-foyer")
     public Foyer addFoyer(@RequestBody Foyer e) {
-        Foyer foyer = foyerService.addFoyer(e);
-        return foyer;
+        return foyerService.addFoyer(e);
+
     }
 
     @DeleteMapping("/remove-foyer/{foyer-id}")
@@ -51,12 +51,12 @@ public class FoyerController {
 
     @PutMapping("/update-foyer")
     public Foyer updateFoyer(@RequestBody Foyer e) {
-        Foyer foyer= foyerService.updateFoyer(e);
-        return foyer;
+        return foyerService.updateFoyer(e);
+
     }
 
     @GetMapping("/Foyerpagination")
-    @ResponseBody
+
     public Page<Foyer> getAllFoyer(Pageable pageable) {
         return foyerService.lire(pageable);
     }

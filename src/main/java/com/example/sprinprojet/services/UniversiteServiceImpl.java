@@ -57,9 +57,9 @@ public class UniversiteServiceImpl implements IUniversiteService {
 
         Foyer foyer = foyerRepository.findById(idFoyer).get(); // parent
         Universite universite = universiteRepository.findByNomUniversite(nomUniversite); // son
-        // universite.setFoyer(foyer);
+
         foyer.setUniversite(universite);
-        // universiteRepository.save(universite);
+
         foyerRepository.save(foyer);
 
         return universite;
@@ -121,7 +121,7 @@ public class UniversiteServiceImpl implements IUniversiteService {
 
         } catch (WriterException | java.io.IOException e) {
             e.printStackTrace();
-            return null;
+            return new byte[0];
         }
     }
 }

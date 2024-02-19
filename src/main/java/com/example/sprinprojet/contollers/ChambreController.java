@@ -28,14 +28,14 @@ public class ChambreController {
 
     @GetMapping("/retrieve-all-chambre")
     public List<Chambre> getChambreList(){
-        List<Chambre>chambreList=iChambreService.retrieveAllChambres();
-        return chambreList;
+        return iChambreService.retrieveAllChambres();
+
     }
 
     @PostMapping("/add-Chambre")
     public Chambre addChambre(@RequestBody Chambre ch) {
-        Chambre chambre = iChambreService.addChambre(ch);
-        return chambre;
+        return iChambreService.addChambre(ch);
+
     }
     @GetMapping("/retrieve-Chambre/{Chambre-id}")
     public Chambre retrieveChambre(@PathVariable("Chambre-id") Long chambreId) {
@@ -47,8 +47,8 @@ public class ChambreController {
     }
     @PutMapping("/update-Chambre")
     public Chambre updateEtudiant(@RequestBody Chambre ch) {
-        Chambre chambre= iChambreService.updateChambre(ch);
-        return chambre;
+        return iChambreService.updateChambre(ch);
+
     }
   @PutMapping("/update-chambre/{id}")
   public Chambre updateChambreByID(@RequestBody Chambre updatedChambre, @PathVariable("id") Long idCahmbre) {
@@ -92,8 +92,8 @@ public class ChambreController {
   }
   @GetMapping("/{nomBloc}")
   public List<Chambre> getChambresParNomBloc(@PathVariable String nomBloc) {
-    List<Chambre> chambres = iChambreService.getChambresParNomBloc(nomBloc);
-    return chambres;
+    return iChambreService.getChambresParNomBloc(nomBloc);
+
   }
   @GetMapping("/nbChambreParTypeEtBloc/{typeChambre}/{idBloc}")
   public long nbChambreParTypeEtBloc(@PathVariable TypeChambre typeChambre , @PathVariable Long idBloc){

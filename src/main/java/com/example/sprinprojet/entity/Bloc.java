@@ -44,8 +44,7 @@ public class Bloc implements Serializable {
 
   @OneToMany(cascade = CascadeType.ALL)
   @JsonIgnore
-  private List<Reservation> Reservations;
+  private List<Reservation> reservations;
 
-  public void setBlocChambre(List<Chambre> chambers) {
-  }
+
 }

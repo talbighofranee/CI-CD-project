@@ -25,15 +25,15 @@ public class EtudiantController {
     @GetMapping("/retrieve-all-etudiants")
 
     public List<Etudiant>getEtudiantList(){
-        List<Etudiant>etudiantList=iEtudiantService.retrieveAllEtudiants();
-        return etudiantList;
+        return iEtudiantService.retrieveAllEtudiants();
+
     }
 
 
     @PostMapping("/add-etudiant")
     public Etudiant addEtudiant(@RequestBody Etudiant e) {
-        Etudiant etudiant = iEtudiantService.addEtudiant(e);
-        return etudiant;
+        return iEtudiantService.addEtudiant(e);
+
     }
     @GetMapping("/retrieve-etudiant/{etudiant-id}")
     @Operation(description="recuperer etudiants par id")
@@ -45,7 +45,7 @@ public class EtudiantController {
             @ApiResponse(responseCode="404",description=" not found", content=@Content)
     }
     )
-    @ResponseBody
+
     public Etudiant retrieveEtudiant(    @Parameter(description = "id") @PathVariable("etudiant-id") Long etudiantId) {
         return iEtudiantService.retrieveEtudiant(etudiantId);
     }
@@ -53,25 +53,21 @@ public class EtudiantController {
     public void removeEtudiant(@PathVariable("etudiant-id") Long idEtudiant) {
         iEtudiantService.removeEtudiant(idEtudiant);
     }
-    /*@PutMapping("/update-etudiant/{idEtudiant}")
-    public Etudiant updateEtudiant(@PathVariable("idEtudiant") Long idEtudiant ,@RequestBody Etudiant e) {
-        Etudiant etudiant= iEtudiantService.updateEtudiant(e);
-        return etudiant;
-    }*/
+
     @PutMapping("/update-etudiant/{id}")
     public Etudiant updateEtudiantByID(@PathVariable("id") Long idEtudiant, @RequestBody Etudiant updatedEtudiant) {
         return iEtudiantService.updateEtudiantAndReservations(idEtudiant, updatedEtudiant);
     }
 
     @PostMapping("/add-all-etudiants")
-    public List addAllEtudiants(@RequestBody List<Etudiant>etudiants){
-        List Listetudiant=iEtudiantService.addEtudiants(etudiants);
-        return Listetudiant;
+    public List<Etudiant> addAllEtudiants(@RequestBody List<Etudiant>etudiants){
+        return iEtudiantService.addEtudiants(etudiants);
+
     }
     @PutMapping("/affecterEtRe/{idreservation}/{nom}/{prenom}")
     public Etudiant affecter(@PathVariable("prenom") String prenom ,@PathVariable("idreservation") String idReservation, @PathVariable("nom") String nom){
-        Etudiant etudiant=iEtudiantService.affecterEtudiantAReservation( nom,  prenom,  idReservation);
-        return etudiant;
+        return iEtudiantService.affecterEtudiantAReservation( nom,  prenom,  idReservation);
+
 
 
     }

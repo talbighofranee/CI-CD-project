@@ -48,9 +48,7 @@ public class FoyerServiceImp  implements IFoyerService{
 
     @Override
     public Foyer addFoyerWithBloc(Foyer foyer) {
-        //bloc parent
-        //foyer son
-        Bloc bloc = new Bloc();
+
 
         return null;
     }
