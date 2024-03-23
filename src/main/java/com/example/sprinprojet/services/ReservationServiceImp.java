@@ -68,7 +68,7 @@ public class ReservationServiceImp implements IReservationService {
 
         for (Reservation reservation : unconfirmedReservations) {
 
-            reservation.setStatus(Status.Annulee);
+            reservation.setStatus(Status.ANNULEE);
             reservationRepository.save(reservation);
         }
     }
@@ -98,7 +98,7 @@ public class ReservationServiceImp implements IReservationService {
         if (reservation != null && reservation.getStatus() == Status.NON_CONFIRMEE) {
 
 
-            reservation.setStatus(Status.Confirmee);
+            reservation.setStatus(Status.CONFIRME);
             reservationRepository.save(reservation);
             List<Etudiant> etudiants = reservation.getEtudiants();
 
