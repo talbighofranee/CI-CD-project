@@ -58,20 +58,20 @@ public class ReservationServiceImp implements IReservationService {
 
         return false;
     }
-    @Transactional
+   // @Transactional
     //@Scheduled(fixedRate = 60000)
     //@Scheduled(cron = "0 0 0 * * *")
-    public void cancelUnconfirmedReservations() {
-        LocalDateTime cutoffDate = LocalDateTime.now().minusHours(1);
-        Date cutoffDateAsDate = Date.from(cutoffDate.atZone(ZoneId.systemDefault()).toInstant());
-        List<Reservation> unconfirmedReservations = reservationRepository.findUnconfirmedReservationsOlderThan(cutoffDateAsDate);
+    //public void cancelUnconfirmedReservations() {
+      //  LocalDateTime cutoffDate = LocalDateTime.now().minusHours(1);
+        //Date cutoffDateAsDate = Date.from(cutoffDate.atZone(ZoneId.systemDefault()).toInstant());
+        //List<Reservation> unconfirmedReservations = reservationRepository.findUnconfirmedReservationsOlderThan(cutoffDateAsDate);
 
-        for (Reservation reservation : unconfirmedReservations) {
+        //for (Reservation reservation : unconfirmedReservations) {
 
-            reservation.setStatus(Status.ANNULEE);
-            reservationRepository.save(reservation);
-        }
-    }
+          //  reservation.setStatus(Status.ANNULEE);
+            //reservationRepository.save(reservation);
+    //    }
+    //}
     private EmailService emailService;
 
     public String getStudentEmail(String reservationId) {
