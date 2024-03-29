@@ -45,7 +45,7 @@ public class BlocServiceImp implements IBlocService{
 blocRepository.deleteById(idBloc);
     }
 
-    public Bloc affecterChambresABloc (List<Long> numChambre, String nomBloc)
+  /*  public Bloc affecterChambresABloc (List<Long> numChambre, String nomBloc)
     {
 
         int i = 0;
@@ -59,8 +59,20 @@ blocRepository.deleteById(idBloc);
         }
         return b;
 
-    }
-
+    }*/
+  public Bloc affecterChambresABloc(List<Long> numChambre, String nomBloc) {
+      Bloc b = blocRepository.findByNomBloc(nomBloc);
+      if (numChambre != null) {
+          for (Long chambreId : numChambre) {
+              Chambre cc = chambreRepository.findByNumeroChambre(chambreId);
+              if (cc != null) {
+                  cc.setBloc(b);
+                  chambreRepository.save(cc);
+              }
+          }
+      }
+      return b;
+  }
     @Scheduled(fixedRate = 60000)
 
 
