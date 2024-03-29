@@ -126,7 +126,8 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <!-- Jacoco plugin for code coverage -->
+
+
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -170,12 +171,16 @@
                 </executions>
             </plugin>
 
-            <!-- Plugin SonarQube pour l'analyse statique du code -->
+
+
+
+
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.8.0.2131</version>
             </plugin>
+
         </plugins>
     </build>
 

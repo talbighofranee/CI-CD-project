@@ -124,11 +124,14 @@ public class ChambreServiceImp implements IChambreService {
     return chambreRepository.countByTypeCAndBloc_IdBloc(type, idBloc);
   }
 
+    @Override
+    public Chambre getChambreByNumeroChambre(long numeroChambre) {
+        return chambreRepository.findByNumeroChambre(numeroChambre);
+    }
 
 
 
-
-  @Override
+    @Override
   public void sendEmail(String to, String subject, String body) {
     SimpleMailMessage message = new SimpleMailMessage();
     message.setTo(to);

@@ -33,6 +33,7 @@ public class ReservationServiceTest {
 
 
 
+
         @Test
         public void testCancelUnconfirmedReservations() {
             // Given
@@ -62,3 +63,4 @@ public class ReservationServiceTest {
             verify(reservationRepository, times(1)).save(any(Reservation.class)); // Verify that save() method is called
         }
     }
+

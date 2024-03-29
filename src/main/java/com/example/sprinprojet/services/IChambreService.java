@@ -31,4 +31,6 @@ public interface IChambreService {
   List<Chambre> getChambresParNomBloc(String nomBloc);
 
   long nbChambreParTypeEtBloc(TypeChambre type, long idBloc);
+
+    Chambre getChambreByNumeroChambre(long l);
 }

@@ -58,6 +58,7 @@ public class ReservationServiceImp implements IReservationService {
 
         return false;
     }
+
     @Transactional
 //@Scheduled(fixedRate = 60000)
 //@Scheduled(cron = "0 0 0 * * *")
@@ -75,6 +76,7 @@ public class ReservationServiceImp implements IReservationService {
         // Annulation des réservations non confirmées
         reservationRepository.cancelUnconfirmedReservations(cutoffDateAsDate);
     }
+
 
 
     private EmailService emailService;
