@@ -19,6 +19,9 @@ public interface ReservationRepository extends JpaRepository<Reservation,String>
     @Query("SELECT r FROM Reservation r WHERE r.status = 'NON_CONFIRMEE' AND r.dateCreation < :cutoffDate")
     List<Reservation> findUnconfirmedReservationsOlderThan(@Param("cutoffDate") Date cutoffDate);
     @Modifying
-    @Query("UPDATE Reservation r SET r.status = 'ANNULÉE' WHERE r.estValide = false AND r.dateCreation < :cutoffDate")
+    @Query("UPDATE Reservation r SET r.status = 'ANNULEE' WHERE r.status = 'NON_CONFIRMEE' AND r.dateCreation < :cutoffDate")
     void cancelUnconfirmedReservations(@Param("cutoffDate") Date cutoffDate);
+
+
+
 }
