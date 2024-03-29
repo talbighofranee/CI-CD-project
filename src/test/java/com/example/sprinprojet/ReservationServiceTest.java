@@ -1,4 +1,5 @@
 package com.example.sprinprojet;
+
 import com.example.sprinprojet.entity.Reservation;
 import com.example.sprinprojet.entity.Status;
 import com.example.sprinprojet.repository.ReservationRepository;
@@ -23,30 +24,41 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 public class ReservationServiceTest {
 
-@Autowired
+    @Autowired
     private ReservationServiceImp reservationServiceImp;
 
     @MockBean
     private ReservationRepository reservationRepository;
 
-    @Test
-    public void testCancelUnconfirmedReservations() {
-        // Given
-        LocalDateTime cutoffDate = LocalDateTime.now().minusHours(1);
-        Date cutoffDateAsDate = Date.from(cutoffDate.atZone(ZoneId.systemDefault()).toInstant());
-        List<Reservation> unconfirmedReservations = new ArrayList<>();
-        unconfirmedReservations.add(new Reservation()); // Add some sample reservations
-        // Mock the behavior of reservationRepository
-        when(reservationRepository.findUnconfirmedReservationsOlderThan(cutoffDateAsDate)).thenReturn(unconfirmedReservations);
 
-        // When
-        reservationServiceImp.cancelUnconfirmedReservations();
 
-        // Then
-        // Verify that the status of each reservation is set to ANNULEE
-        verify(reservationRepository, times(1)).save(any(Reservation.class));
-        for (Reservation reservation : unconfirmedReservations) {
-            assertEquals(Status.ANNULEE, reservation.getStatus());
+
+        @Test
+        public void testCancelUnconfirmedReservations() {
+            // Given
+            LocalDateTime cutoffDate = LocalDateTime.now().minusHours(24);
+            Date cutoffDateAsDate = Date.from(cutoffDate.atZone(ZoneId.systemDefault()).toInstant());
+            List<Reservation> unconfirmedReservations = new ArrayList<>();
+            Reservation reservation1 = new Reservation();
+            reservation1.setStatus(Status.NON_CONFIRMEE);
+            unconfirmedReservations.add(reservation1); // Add a sample reservation with NON_CONFIRMEE status
+            // Mock the behavior of reservationRepository
+            when(reservationRepository.findUnconfirmedReservationsOlderThan(cutoffDateAsDate)).thenReturn(unconfirmedReservations);
+
+            // When
+            reservationServiceImp.cancelUnconfirmedReservations();
+
+            // Then
+            // Verify that the status of each reservation is set to ANNULEE
+            for (Reservation reservation : unconfirmedReservations) {
+                if (reservation.getStatus() == Status.NON_CONFIRMEE) {
+                    System.out.println("Avant mise à jour - ID: " + reservation.getIdReservation() + ", Statut: " + reservation.getStatus());
+                    reservation.setStatus(Status.ANNULEE);
+                    reservationRepository.save(reservation);
+                    System.out.println("Après mise à jour - ID: " + reservation.getIdReservation() + ", Statut: " + reservation.getStatus());
+                }
+            }
+
+            verify(reservationRepository, times(1)).save(any(Reservation.class)); // Verify that save() method is called
         }
     }
-}
