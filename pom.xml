@@ -109,6 +109,16 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>3.11.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
 
 
     </dependencies>
@@ -132,13 +142,21 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+<<<<<<< Updated upstream
                 <version>0.8.7</version> <!-- Use the latest version -->
+=======
+                <version>0.8.7</version>
+>>>>>>> Stashed changes
                 <executions>
                     <execution>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
+<<<<<<< Updated upstream
+=======
+                    <!-- attached to Maven test phase -->
+>>>>>>> Stashed changes
                     <execution>
                         <id>report</id>
                         <phase>test</phase>
@@ -146,6 +164,31 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
+<<<<<<< Updated upstream
+=======
+
+                    <execution>
+                        <id>jacoco-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>PACKAGE</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.9</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+
+>>>>>>> Stashed changes
                 </executions>
             </plugin>
 
