@@ -6,8 +6,10 @@ import com.example.sprinprojet.repository.ChambreRepository;
 import com.example.sprinprojet.services.ChambreServiceImp;
 import com.google.zxing.WriterException;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
@@ -20,8 +22,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
-class ChambreServiceTest {
+@ExtendWith(MockitoExtension.class)
+class ChambreServiceImpTest {
 
     @Mock
     private ChambreRepository chambreRepository;
