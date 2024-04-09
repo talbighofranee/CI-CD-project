@@ -6,8 +6,7 @@ import com.example.sprinprojet.entity.Status;
 import com.example.sprinprojet.repository.ReservationRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
