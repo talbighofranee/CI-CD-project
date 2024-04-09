@@ -14,7 +14,6 @@ services:
     networks:
       - backnetwork
 
-
   phpmyadmin:
     container_name: phpmyadmin
     image: phpmyadmin/phpmyadmin
@@ -24,6 +23,18 @@ services:
       PMA_PASSWORD: root
     ports:
       - "8084:84"
+    networks:
+      - backnetwork
+
+  spring-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8085:8085"
+    depends_on:
+      - db
     networks:
       - backnetwork
 
