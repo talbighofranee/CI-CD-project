@@ -203,8 +203,8 @@
     <distributionManagement>
         <repository>
             <id>deploymentRepo</id>
-            <name>devopsrepo</name>
-            <url>http://127.0.0.1:8081/repository/devopsrepo/</url>
+            <name>nexus-repo</name>
+            <url>http://192.168.180.131:8081/repository/nexus-repo/</url>
         </repository>
     </distributionManagement>
 
