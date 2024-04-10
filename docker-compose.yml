@@ -26,17 +26,5 @@ services:
     networks:
       - backnetwork
 
-  spring-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    restart: always
-    ports:
-      - "8086:8086"
-    depends_on:
-      - db
-    networks:
-      - backnetwork
-
 networks:
   backnetwork:
