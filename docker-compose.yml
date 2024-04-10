@@ -13,6 +13,8 @@ services:
       MYSQL_DATABASE: projetspring
     networks:
       - backnetwork
+    volumes:
+      - mysql_data:/var/lib/mysql
 
   phpmyadmin:
     container_name: phpmyadmin
@@ -27,22 +29,20 @@ services:
       - backnetwork
 
   spring-boot-container:
-      image: arwapipeline_spring-app
-      ports:
-        - '8086:8086'
-      depends_on:
-        - db
-      environment:
-        SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/projetspring
-        SPRING_DATASOURCE_USERNAME: arwa
-        SPRING_DATASOURCE_PASSWORD: root
-      networks:
-        - backnetwork
-      volumes:
-        - mysql_data:/var/lib/mysql
+    image: arwapipeline_spring-app
+    ports:
+      - '8086:8086'
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/projetspring
+      SPRING_DATASOURCE_USERNAME: arwa
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - backnetwork
 
 networks:
   backnetwork:
-volumes:
-  - mysql_data:/var/lib/mysql
 
+volumes:
+  mysql_data:
