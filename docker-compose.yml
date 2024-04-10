@@ -2,41 +2,35 @@ version: '3'
 
 services:
   db:
-    container_name: db
     image: mysql:latest
+    container_name: mysql
     ports:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: root
       MYSQL_PASSWORD: root
-      MYSQL_DATABASE: projetspring
-    networks:
-      - backnetwork
+      MYSQL_DATABASE: timesheet
+    volumes:
+      - mysql_data:/var/lib/mysql
 
-  phpmyadmin:
-    container_name: phpmyadmin
-    image: phpmyadmin/phpmyadmin
-    environment:
-      PMA_HOST: db
-      PMA_USER: root
-      PMA_PASSWORD: root
-    ports:
-      - "8084:84"
-    networks:
-      - backnetwork
-
-  spring-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    restart: always
+  app-timesheet:
+    image: foyer/timesheet
+    restart: on-failure
     ports:
       - "8086:8086"
+    stdin_open: true
+    tty: true
     depends_on:
       - db
-    networks:
-      - backnetwork
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/timesheet?serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_JPA_DIALECT: org.hibernate.dialect.MySQL5Dialect
 
 networks:
-  backnetwork:
+  backend:
+
+volumes:
+  mysql_data:
