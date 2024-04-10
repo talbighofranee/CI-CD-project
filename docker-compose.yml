@@ -26,5 +26,13 @@ services:
     networks:
       - backnetwork
 
+  spring-boot-container:
+      image: arwapipeline_spring-app
+      ports:
+        - '8086:8086'
+      depends_on:
+        - db
+
+
 networks:
   backnetwork:
