@@ -22,7 +22,7 @@ services:
       PMA_USER: root
       PMA_PASSWORD: root
     ports:
-      - "8084:84"
+      - "8084:8084"
     networks:
       - backnetwork
 
@@ -32,7 +32,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
-      - "8085:8085"
+      - "8086:8086"
     depends_on:
       - db
     networks:
