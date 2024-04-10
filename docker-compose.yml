@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  db:
+    container_name: db
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: projetspring
+    networks:
+      - backnetwork
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8084:84"
+    networks:
+      - backnetwork
+
+  spring-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8086:8086"
+    depends_on:
+      - db
+    networks:
+      - backnetwork
+
+networks:
+  backnetwork:
