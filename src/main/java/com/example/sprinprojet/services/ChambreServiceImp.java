@@ -154,4 +154,8 @@ public class ChambreServiceImp implements IChambreService {
     }
     return chambre;
   }
+    public List<Chambre> getChambresByNomBloc(String nomBloc) {
+        return chambreRepository.findByBlocNomBloc(nomBloc);
+    }
+
 }

@@ -1,10 +1,12 @@
 package com.example.sprinprojet;
 
+import com.example.sprinprojet.entity.Bloc;
 import com.example.sprinprojet.entity.Chambre;
 import com.example.sprinprojet.entity.TypeChambre;
 import com.example.sprinprojet.repository.ChambreRepository;
 import com.example.sprinprojet.services.ChambreServiceImp;
 import com.google.zxing.WriterException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,10 +16,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -116,6 +119,61 @@ class ChambreServiceImpTest {
         // Then
         assertEquals(expectedCount, actualCount);
         // Add more assertions as needed
+    }
+    @Test
+    @DisplayName("Test Retrieve Chambre By ID")
+    void testRetrieveChambreById() {
+        // Given
+        long chambreId = 1L;
+        Chambre expectedChambre = new Chambre();
+        expectedChambre.setIdChambre(chambreId);
+        when(chambreRepository.findById(chambreId)).thenReturn(Optional.of(expectedChambre));
+
+        // When
+        Chambre retrievedChambre = chambreService.retrieveChambre(chambreId);
+
+        // Then
+        assertEquals(expectedChambre, retrievedChambre);
+    }
+
+
+
+
+    @Test
+    @DisplayName("Test Retrieve All Chambres When Empty")
+    void testRetrieveAllChambresWhenEmpty() {
+        // Given
+        when(chambreRepository.findAll()).thenReturn(Collections.emptyList());
+
+        // When
+        List<Chambre> allChambres = chambreService.retrieveAllChambres();
+
+        // Then
+        assertEquals(0, allChambres.size());
+    }
+    @Test
+    @DisplayName("Test Get Chambres By Nom Bloc")
+    void testGetChambresByNomBloc() {
+        // Given
+        String nomBloc = "BlocA";
+        Bloc bloc = new Bloc();
+        bloc.setIdBloc(1L);
+        bloc.setNomBloc(nomBloc);
+        Chambre chambre1 = new Chambre();
+        chambre1.setIdChambre(1L);
+        chambre1.setBloc(bloc);
+        Chambre chambre2 = new Chambre();
+        chambre2.setIdChambre(2L);
+        chambre2.setBloc(bloc);
+        when(chambreRepository.findByBlocNomBloc(nomBloc)).thenReturn(Arrays.asList(chambre1, chambre2));
+
+        // When
+        List<Chambre> chambres = chambreService.getChambresByNomBloc(nomBloc);
+
+        // Then
+        assertEquals(2, chambres.size());
+        assertTrue(chambres.contains(chambre1));
+        assertTrue(chambres.contains(chambre2));
     }
 
 
