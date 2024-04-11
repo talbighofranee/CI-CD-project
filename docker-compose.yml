@@ -9,8 +9,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      MYSQL_DATABASE: timesheet
+      MYSQL_PASSWORD:
+      MYSQL_DATABASE: foyer
     volumes:
       - mysql_data:/var/lib/mysql
 
@@ -24,10 +24,9 @@ services:
     depends_on:
       - db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/foyer?serverTimezone=UTC
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/foyer
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
-      SPRING_JPA_DIALECT: org.hibernate.dialect.MySQL5Dialect
+      SPRING_DATASOURCE_PASSWORD:
 
 networks:
   backend:
