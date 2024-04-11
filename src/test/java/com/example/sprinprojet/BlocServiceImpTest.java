@@ -83,7 +83,7 @@ public class BlocServiceImpTest {
         when(chambreRepository.findByNumeroChambre(anyLong())).thenReturn(chambre1, chambre2);
 
         // Testing service method
-        Bloc resultBloc = blocService.affecterChambresABloc(chambreIds, "TestBloc");
+        Bloc resultBloc = blocService.affecterChambresABloc(chambreIds, "TestBlocc");
 
         // Assertions
         assertNotNull(resultBloc);
