@@ -3,6 +3,7 @@ package com.example.sprinprojet;
 import com.example.sprinprojet.entity.Bloc;
 import com.example.sprinprojet.entity.Chambre;
 import com.example.sprinprojet.entity.TypeChambre;
+import com.example.sprinprojet.repository.BlocRepository;
 import com.example.sprinprojet.repository.ChambreRepository;
 import com.example.sprinprojet.services.ChambreServiceImp;
 import com.google.zxing.WriterException;
@@ -13,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mail.javamail.JavaMailSender;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -30,6 +32,10 @@ class ChambreServiceImpTest {
 
     @Mock
     private ChambreRepository chambreRepository;
+    @Mock
+    private BlocRepository blocRepository;
+    @Mock
+    private JavaMailSender javaMailSender; // Add this line to mock JavaMailSender
 
     @InjectMocks
     private ChambreServiceImp chambreService;
@@ -175,6 +181,62 @@ class ChambreServiceImpTest {
         assertTrue(chambres.contains(chambre1));
         assertTrue(chambres.contains(chambre2));
     }
+    @Test
+    @DisplayName("Test Get Chambres By Nom Bloc When Empty")
+    void testGetChambresByNomBlocWhenEmpty() {
+        // Given
+        String nomBloc = "NonExistentBloc";
+        when(chambreRepository.findByBlocNomBloc(nomBloc)).thenReturn(Collections.emptyList());
+
+        // When
+        List<Chambre> chambres = chambreService.getChambresByNomBloc(nomBloc);
+
+        // Then
+        assertNotNull(chambres);
+        assertEquals(0, chambres.size());
+    }
+
+    @Test
+    @DisplayName("Test Get Chambre By Numero Chambre")
+    void testGetChambreByNumeroChambre() {
+        // Given
+        long numeroChambre = 1234L;
+        Chambre expectedChambre = new Chambre();
+        expectedChambre.setNumeroChambre(numeroChambre);
+        when(chambreRepository.findByNumeroChambre(numeroChambre)).thenReturn(expectedChambre);
+
+        // When
+        Chambre retrievedChambre = chambreService.getChambreByNumeroChambre(numeroChambre);
+
+        // Then
+        assertNotNull(retrievedChambre);
+        assertEquals(expectedChambre, retrievedChambre);
+    }
+
+    @Test
+    @DisplayName("Test Affecter Chambre A Bloc")
+    void testAffecterChambreABloc() {
+        // Given
+        Long chambreId = 1L;
+        Long blocId = 1L;
+        Chambre chambre = new Chambre();
+        chambre.setIdChambre(chambreId);
+        Bloc bloc = new Bloc();
+        bloc.setIdBloc(blocId);
+        when(chambreRepository.findById(chambreId)).thenReturn(Optional.of(chambre));
+        when(blocRepository.findById(blocId)).thenReturn(Optional.of(bloc));
+
+        // When
+        Chambre assignedChambre = chambreService.affecterChambreABloc(chambreId, blocId);
+
+        // Then
+        assertNotNull(assignedChambre.getBloc());
+        assertEquals(bloc, assignedChambre.getBloc());
+    }
+
+
+// Add more test cases as needed to cover remaining scenarios and edge cases
+
 
 
 
