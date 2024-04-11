@@ -24,7 +24,7 @@ services:
     depends_on:
       - db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/timesheet?serverTimezone=UTC
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/foyer?serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
       SPRING_JPA_DIALECT: org.hibernate.dialect.MySQL5Dialect
