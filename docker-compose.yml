@@ -15,7 +15,7 @@ services:
       - mysql_data:/var/lib/mysql
 
   app-timesheet:
-    image: foyer/timesheet:1.0.0
+    image: talbighofrane/foyer:1.0.0
     restart: on-failure
     ports:
       - "8086:8086"
