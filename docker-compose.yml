@@ -29,7 +29,7 @@ services:
       - backnetwork
 
   spring-boot-container:
-    image: arwapipeline_spring-app
+    image: emna698/foyer-image
     ports:
       - '8086:8086'
     depends_on:
