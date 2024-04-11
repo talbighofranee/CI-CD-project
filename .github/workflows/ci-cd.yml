@@ -1,0 +1,30 @@
+name: CI/CD Pipeline on Push
+
+on:
+  push:
+    branches:
+      - Emna
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+
+      - name: Build and Test
+        run: |
+          mvn clean
+          mvn compile
+          mvn test
+
+      - name: Deploy
+        run: |
+          mvn deploy
+        # Add your deployment steps here
