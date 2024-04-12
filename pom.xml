@@ -21,7 +21,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
@@ -82,7 +85,10 @@
             <version>2.0.29</version> <!-- Utilisez la version la plus récente -->
         </dependency>
         <!-- pom.xml -->
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.modelmapper</groupId>
@@ -201,4 +207,5 @@
             <url>http://localhost:8081/repository/Esprit-Talents/</url>
         </repository>
     </distributionManagement>
+
 </project>
