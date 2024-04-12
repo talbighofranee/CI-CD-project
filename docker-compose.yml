@@ -29,7 +29,7 @@ services:
       - backnetwork
 
   spring-boot-container:
-    image: my-foyer-image
+    image: arwabougattaya180/my-foyer-image
     ports:
       - '8086:8086'
     depends_on:
@@ -42,7 +42,7 @@ services:
       - backnetwork
 
   front-end:
-      image: my-front-image
+      image: arwabougattaya180/my-front-image
       ports:
         - '4200:4200'
       networks:
