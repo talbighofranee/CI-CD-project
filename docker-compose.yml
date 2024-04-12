@@ -41,7 +41,7 @@ services:
     networks:
       - backnetwork
 
-    front-end:
+  front-end:
       image: my-front-image
       ports:
         - '4200:4200'
