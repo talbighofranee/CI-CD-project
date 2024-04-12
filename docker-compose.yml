@@ -35,9 +35,16 @@ services:
     depends_on:
       - db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/projetspring
-      SPRING_DATASOURCE_USERNAME: arwa
-      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/projetspring?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD:
+    networks:
+      - backnetwork
+
+  front-end:
+    image: emna698/front-images
+    ports:
+      - '4200:4200'
     networks:
       - backnetwork
 
