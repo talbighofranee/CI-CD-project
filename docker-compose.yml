@@ -15,7 +15,7 @@ services:
       - mysql_data:/var/lib/mysql
 
   spring_app:
-    image: springapp/foyer:1.0.0
+    image: sofienmeddeb278/projetdevops
     restart: on-failure
     ports:
       - "8086:8086"
