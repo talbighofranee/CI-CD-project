@@ -6,6 +6,7 @@ services:
     container_name: mysql
     ports:
       - "3306:3306"
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: root
@@ -13,6 +14,7 @@ services:
       MYSQL_DATABASE: foyer
     volumes:
       - mysql_data:/var/lib/mysql
+    
 
   app-timesheet:
     image: talbighofrane/foyer:1.0.0
@@ -29,8 +31,15 @@ services:
       SPRING_DATASOURCE_PASSWORD:
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL5Dialect
 
+  front-end:
+    image: talbighofrane/front
+    ports:
+      - '4200:4200'
+    networks:
+      - backnetwork
+
 networks:
-  backend:
+  backnetwork:
 
 volumes:
   mysql_data:
