@@ -27,37 +27,37 @@ import java.util.logging.Logger;
 @Service
 @AllArgsConstructor
 public class ChambreServiceImp implements IChambreService {
-   ChambreRepository chambreRepository ;
-   BlocRepository blocRepository;
-   FoyerRepository foyerRepository;
-   ReservationRepository reservationRepository;
-  private final JavaMailSender javaMailSender;
+    ChambreRepository chambreRepository ;
+    BlocRepository blocRepository;
+    FoyerRepository foyerRepository;
+    ReservationRepository reservationRepository;
+    private final JavaMailSender javaMailSender;
 
-   @Override
-   public List<Chambre> retrieveAllChambres() {
-      return chambreRepository.findAll();
-   }
+    @Override
+    public List<Chambre> retrieveAllChambres() {
+        return chambreRepository.findAll();
+    }
 
-   @Override
-   public Chambre addChambre(Chambre ch) {
-      return chambreRepository.save(ch);
-   }
+    @Override
+    public Chambre addChambre(Chambre ch) {
+        return chambreRepository.save(ch);
+    }
 
-   @Override
-   public Chambre updateChambre(Chambre ch) {
-      return chambreRepository.save(ch);
-   }
+    @Override
+    public Chambre updateChambre(Chambre ch) {
+        return chambreRepository.save(ch);
+    }
 
-   @Override
-   public Chambre retrieveChambre(Long idChambre) {
-      return chambreRepository.findById(idChambre).get();
-   }
+    @Override
+    public Chambre retrieveChambre(Long idChambre) {
+        return chambreRepository.findById(idChambre).get();
+    }
 
-   @Override
-   public void removeChambre(Long idChambre) {
-      chambreRepository.deleteById(idChambre);
+    @Override
+    public void removeChambre(Long idChambre) {
+        chambreRepository.deleteById(idChambre);
 
-   }
+    }
 
     @Override
     public void pourcentageChambreParTypeChambre(Logger logger) {
@@ -66,10 +66,10 @@ public class ChambreServiceImp implements IChambreService {
 
 
     public Set<Chambre>getChambreParNomBloc(String nomb){
-      Bloc b =blocRepository.findByNomBloc(nomb);
+        Bloc b =blocRepository.findByNomBloc(nomb);
         return b.getChambres();
 
-}
+    }
 
 
     public byte[] generateQRCode(Chambre chambre) throws IOException, WriterException {
@@ -93,36 +93,36 @@ public class ChambreServiceImp implements IChambreService {
 
 
 //  @Scheduled(cron = "0 1 * * * *")
-  //public void pourcentageChambreParTypeChambre(Logger logger) {
+    //public void pourcentageChambreParTypeChambre(Logger logger) {
 
     //  Map<TypeChambre, List<Chambre>> chambreByType = chambreRepository.findAll()
-      //        .stream()
-        //      .collect(Collectors.groupingBy(Chambre::getTypeC));
+    //        .stream()
+    //      .collect(Collectors.groupingBy(Chambre::getTypeC));
 
 
-      //long totalchbres = chambreRepository.count();
-      //chambreByType.forEach((type, chbres) -> {
-        //  double pourcentage = (chbres.size() * 100.0) / totalchbres;
-         // logger.info(String.format("Total chambres: %d, Pourcentage chambres de type %s: %.2f%%", totalchbres, type, pourcentage));
-     // });
-  //}
-  public List<Chambre> getChambresParNomBloc(String nomBloc) {
-    // Use the BlocRepository to find the Bloc entity by nomBloc
-    Bloc bloc = blocRepository.findByNomBloc(nomBloc);
+    //long totalchbres = chambreRepository.count();
+    //chambreByType.forEach((type, chbres) -> {
+    //  double pourcentage = (chbres.size() * 100.0) / totalchbres;
+    // logger.info(String.format("Total chambres: %d, Pourcentage chambres de type %s: %.2f%%", totalchbres, type, pourcentage));
+    // });
+    //}
+    public List<Chambre> getChambresParNomBloc(String nomBloc) {
+        // Use the BlocRepository to find the Bloc entity by nomBloc
+        Bloc bloc = blocRepository.findByNomBloc(nomBloc);
 
-    if (bloc != null) {
-      // If the Bloc is found, retrieve the associated Chambres
-      Set<Chambre> chambres = bloc.getChambres();
-      return new ArrayList<>(chambres); // Convert the Set to a List
-    } else {
-      // Handle the case where no Bloc is found by the given nomBloc
-      return Collections.emptyList(); // Return an empty list or handle the situation as needed
+        if (bloc != null) {
+            // If the Bloc is found, retrieve the associated Chambres
+            Set<Chambre> chambres = bloc.getChambres();
+            return new ArrayList<>(chambres); // Convert the Set to a List
+        } else {
+            // Handle the case where no Bloc is found by the given nomBloc
+            return Collections.emptyList(); // Return an empty list or handle the situation as needed
+        }
     }
-  }
 
-  public long nbChambreParTypeEtBloc(TypeChambre type, long idBloc) {
-    return chambreRepository.countByTypeCAndBloc_IdBloc(type, idBloc);
-  }
+    public long nbChambreParTypeEtBloc(TypeChambre type, long idBloc) {
+        return chambreRepository.countByTypeCAndBloc_IdBloc(type, idBloc);
+    }
 
     @Override
     public Chambre getChambreByNumeroChambre(long numeroChambre) {
@@ -132,26 +132,30 @@ public class ChambreServiceImp implements IChambreService {
 
 
     @Override
-  public void sendEmail(String to, String subject, String body) {
-    SimpleMailMessage message = new SimpleMailMessage();
-    message.setTo(to);
-    message.setSubject(subject);
-    message.setText(body);
-    javaMailSender.send(message);
-  }
-  public Chambre affecterChambreABloc(Long chambreId, Long blocId) {
-    Chambre chambre = chambreRepository.findById(chambreId).orElse(null);
-    Bloc bloc = blocRepository.findById(blocId).orElse(null);
-
-    if (chambre != null && bloc != null) {
-      chambre.setBloc(bloc);
-      chambreRepository.save(chambre);
-      String to = "emna.felfel@esprit.tn"; // replace with the recipient's email
-      String subject = "Chambre Assigned to Bloc";
-      String body = "Chambre with ID " + chambreId + " has been assigned to Bloc " + bloc.getNomBloc();
-
-      sendEmail(to, subject, body);
+    public void sendEmail(String to, String subject, String body) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(body);
+        javaMailSender.send(message);
     }
-    return chambre;
-  }
+    public Chambre affecterChambreABloc(Long chambreId, Long blocId) {
+        Chambre chambre = chambreRepository.findById(chambreId).orElse(null);
+        Bloc bloc = blocRepository.findById(blocId).orElse(null);
+
+        if (chambre != null && bloc != null) {
+            chambre.setBloc(bloc);
+            chambreRepository.save(chambre);
+            String to = "emna.felfel@esprit.tn"; // replace with the recipient's email
+            String subject = "Chambre Assigned to Bloc";
+            String body = "Chambre with ID " + chambreId + " has been assigned to Bloc " + bloc.getNomBloc();
+
+            sendEmail(to, subject, body);
+        }
+        return chambre;
+    }
+    public List<Chambre> getChambresByNomBloc(String nomBloc) {
+        return chambreRepository.findByBlocNomBloc(nomBloc);
+    }
+
 }

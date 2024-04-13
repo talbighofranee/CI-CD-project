@@ -14,7 +14,7 @@ services:
       MYSQL_DATABASE: foyer
     volumes:
       - mysql_data:/var/lib/mysql
-    
+
 
   app-timesheet:
     image: talbighofrane/foyer:1.0.0
