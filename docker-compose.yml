@@ -2,32 +2,44 @@ version: '3'
 
 services:
   db:
+    container_name: db
     image: mysql:latest
-    container_name: mysql
     ports:
       - "3306:3306"
-    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: root
       MYSQL_PASSWORD: root
       MYSQL_DATABASE: foyer
+    networks:
+      - backnetwork
     volumes:
       - mysql_data:/var/lib/mysql
 
-  app-timesheet:
-    image: talbighofrane/foyer:1.0.0
-
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
     ports:
-      - "8086:8086"
-    stdin_open: true
-    tty: true
+      - "8084:80"
+    networks:
+      - backnetwork
+
+  spring-boot-container:
+    image: talbighofrane/foyer:1.0.0
+    ports:
+      - '8086:8086'
     depends_on:
       - db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/foyer?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/foyer
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - backnetwork
 
   front-end:
     image: talbighofrane/front
