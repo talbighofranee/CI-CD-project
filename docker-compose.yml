@@ -24,8 +24,11 @@ services:
     restart: unless-stopped
     volumes:
       - db:/var/lib/mysql
-
-
+  front:
+    image: sofienmeddeb278/projetdevopsfront:latest
+    ports:
+        - "4200:80"
+    restart: always
 
 volumes:
   db:
