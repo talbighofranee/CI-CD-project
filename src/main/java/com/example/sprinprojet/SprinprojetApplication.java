@@ -29,13 +29,28 @@ public class SprinprojetApplication {
 
         @Bean
         public CorsFilter corsFilter() {
+            CorsConfiguration corsConfig = new CorsConfiguration();
+
+            // Allow all origins (you might want to restrict this in production)
+            corsConfig.addAllowedOrigin("http://localhost:4200/");
+
+            // Allow specific HTTP methods
+            corsConfig.addAllowedMethod("GET");
+            corsConfig.addAllowedMethod("POST");
+            corsConfig.addAllowedMethod("PUT");
+            corsConfig.addAllowedMethod("DELETE");
+
+            // Allow all headers
+            corsConfig.addAllowedHeader("*");
+
+            // Set the maximum age of the preflight request in seconds
+            corsConfig.setMaxAge(3600L); // 1 hour
+
             UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-            CorsConfiguration config = new CorsConfiguration();
-            config.addAllowedOrigin("http://192.168.80.128:4200");
-            config.addAllowedOrigin("http://localhost:4200");
-            config.addAllowedHeader("*");
-            config.addAllowedMethod("*");
-            source.registerCorsConfiguration("/**", config);
+
+            // Apply the CORS configuration to all paths
+            source.registerCorsConfiguration("/**", corsConfig);
+
             return new CorsFilter(source);
         }
     }
