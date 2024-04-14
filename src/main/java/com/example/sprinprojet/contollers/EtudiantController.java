@@ -18,6 +18,8 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/etudiant")
+@CrossOrigin(origins = "http://192.168.80.128:4200")
+
 public class EtudiantController {
     EtudiantServiceImp iEtudiantService;
 

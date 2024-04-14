@@ -25,6 +25,13 @@ public class Universite implements Serializable {
 
     @OneToOne(mappedBy = "universite")
     private Foyer foyer;
+
+    public Universite(long l, String s, String bbb) {
+        this.idUniversite=l;
+        this.nomUniversite=s;
+        this.address=bbb;
+    }
+
     public void setFoyUni(Foyer foyer) {
         //vide
     }

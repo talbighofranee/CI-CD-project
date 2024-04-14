@@ -24,6 +24,8 @@ import java.util.List;
 @RestController
 
 @RequestMapping("/foyer")
+@CrossOrigin(origins = "http://192.168.80.128:4200")
+
 public class FoyerController {
     private IFoyerService foyerService;
 

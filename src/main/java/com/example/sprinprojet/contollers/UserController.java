@@ -23,6 +23,8 @@ import java.util.Map;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/user")
+@CrossOrigin(origins = "http://192.168.80.128:4200")
+
 @Slf4j
 public class UserController {
     private UserRepository userRepository;
