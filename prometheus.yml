@@ -5,7 +5,7 @@ global:
 scrape_configs:
   - job_name: 'prometheus'
     static_configs:
-      - targets: ['192.168.10.128 :9090']
+      - targets: ['192.168.10.128:9090']
 
   - job_name: 'jenkins'
     metrics_path: '/prometheus'
@@ -15,4 +15,4 @@ scrape_configs:
   - job_name: 'spring'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['spring-boot-container:8086']
+      - targets: ['192.168.10.12:8086']
