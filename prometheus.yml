@@ -8,11 +8,20 @@ scrape_configs:
       - targets: ['localhost:9090']
 
   - job_name: 'jenkins'
-   metrics_path: '/prometheus'
+    metrics_path: '/prometheus'
     static_configs:
       - targets: ['192.168.10.128:8080']
 
-  - job_name: 'spring'
-    metrics_path: '/actuator/prometheus'
-    static_configs:
-      - targets: ['localhost:8086']
+  #- job_name: 'spring'
+   # metrics_path: '/actuator/prometheus'
+    #static_configs:
+     # - targets: ['localhost:8086']
+
+  - job_name: 'MyAppMetrics'
+      metrics_path: '/projet/actuator/prometheus'
+      scrape_interval: 60s
+      scrape_timeout: 1m
+      static_configs:
+        - targets: ['192.168.10.128:8086']
+          labels:
+            application: 'SPRING'
