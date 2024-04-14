@@ -67,6 +67,7 @@ services:
       volumes:
         - prometheus_data:/prometheus
         - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
       restart: always
       networks:
         - backnetwork
