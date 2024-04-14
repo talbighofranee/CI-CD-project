@@ -92,20 +92,7 @@ public class ChambreServiceImp implements IChambreService {
 
 
 
-//  @Scheduled(cron = "0 1 * * * *")
-  //public void pourcentageChambreParTypeChambre(Logger logger) {
 
-    //  Map<TypeChambre, List<Chambre>> chambreByType = chambreRepository.findAll()
-      //        .stream()
-        //      .collect(Collectors.groupingBy(Chambre::getTypeC));
-
-
-      //long totalchbres = chambreRepository.count();
-      //chambreByType.forEach((type, chbres) -> {
-        //  double pourcentage = (chbres.size() * 100.0) / totalchbres;
-         // logger.info(String.format("Total chambres: %d, Pourcentage chambres de type %s: %.2f%%", totalchbres, type, pourcentage));
-     // });
-  //}
   public List<Chambre> getChambresParNomBloc(String nomBloc) {
     // Use the BlocRepository to find the Bloc entity by nomBloc
     Bloc bloc = blocRepository.findByNomBloc(nomBloc);
