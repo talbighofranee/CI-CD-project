@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin(origins = "http://192.168.80.128:4200")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/universite")
