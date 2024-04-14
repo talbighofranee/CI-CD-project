@@ -91,7 +91,7 @@ blocRepository.deleteById(idBloc);
   public void trierBlocsParNomBloc(List<Bloc> blocs) {
     Collections.sort(blocs, Comparator.comparing(Bloc::getNomBloc));
   }
-  @Scheduled(fixedRate = 20000) // Définir le taux en millisecondes (ici, chaque minute)
+  /*@Scheduled(fixedRate = 20000) // Définir le taux en millisecondes (ici, chaque minute)
   public void checkAvailableRooms() {
     List<Bloc> blocs = blocRepository.findAll();
 
@@ -107,7 +107,7 @@ blocRepository.deleteById(idBloc);
         log.info("Pour le bloc " + bloc.getNomBloc() + ", toutes les chambres sont occupées.");
       }
     }
-  }
+  }*/
 
 }
 

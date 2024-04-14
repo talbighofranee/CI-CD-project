@@ -211,33 +211,7 @@ public class BlocServiceImpTest {
         assertIterableEquals(expectedSortedNames, sortedNames);
     }
 
-    @Test
-    public void testCheckAvailableRooms() {
-        // Prepare test data
-        Bloc bloc1 = new Bloc();
-        bloc1.setNomBloc("Bloc1");
-        bloc1.setCapacitebloc(10L);
 
-        // Create chambres for bloc1
-        Set<Chambre> chambresBloc1 = new HashSet<>();
-        for (int i = 0; i < 9; i++) {
-            Chambre chambre = new Chambre();
-            chambresBloc1.add(chambre);
-        }
-        bloc1.setChambres(chambresBloc1);
-
-        // Mock blocRepository
-        when(blocRepository.findAll()).thenReturn(Collections.singletonList(bloc1));
-
-        // Call the method
-        BlocServiceImp blocService = new BlocServiceImp(blocRepository, null);
-        blocService.checkAvailableRooms(); // This will execute the scheduled method
-
-        // Verify the number of available rooms for bloc1
-        long expectedAvailableRoomsBloc1 = bloc1.getCapacitebloc() - chambresBloc1.size();
-        long actualAvailableRoomsBloc1 = bloc1.getCapacitebloc() - bloc1.getChambres().size();
-        assertEquals(expectedAvailableRoomsBloc1, actualAvailableRoomsBloc1, "Incorrect number of available rooms for bloc1");
-    }
 
 
 }
