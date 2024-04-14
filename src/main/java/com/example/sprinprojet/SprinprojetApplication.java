@@ -33,6 +33,7 @@ public class SprinprojetApplication {
 
             // Allow all origins (you might want to restrict this in production)
             corsConfig.addAllowedOrigin("http://localhost:4200/");
+            corsConfig.addAllowedOrigin("http://192.168.80.128:4200/");
 
             // Allow specific HTTP methods
             corsConfig.addAllowedMethod("GET");
