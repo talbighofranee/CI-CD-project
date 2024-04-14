@@ -81,5 +81,5 @@ import static org.mockito.Mockito.when;
         assertEquals(reservations, result);
     }
 
-    
+
 }
