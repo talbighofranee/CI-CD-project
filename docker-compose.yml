@@ -10,11 +10,10 @@ services:
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
     restart: unless-stopped
-    networks:
-      - containerdocker_default
-
     depends_on:
       - dbmysql
+    networks:
+      - my-network
 
   dbmysql:
     image: "mysql:8.1.0"
@@ -24,22 +23,22 @@ services:
     ports:
       - "3306:3306"
     restart: unless-stopped
-    networks:
-      - containerdocker_default
-
     volumes:
       - db:/var/lib/mysql
+    networks:
+      - my-network
+
   front:
     image: sofienmeddeb278/projetdevopsfront:latest
     ports:
-        - "4200:80"
+      - "4200:80"
     restart: always
     networks:
-      - containerdocker_default
+      - my-network
 
+networks:
+  my-network:
+    driver: bridge
 
 volumes:
   db:
-networks:
-  containerdocker_default:
-    external: true
