@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/Bloc")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://192.168.80.128:4200")
 @Tag(name = "Bloc API", description = "API for managing Bloc entities")
 
 
