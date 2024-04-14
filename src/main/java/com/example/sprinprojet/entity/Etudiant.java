@@ -39,4 +39,13 @@ public class Etudiant implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Reservation> reservations; //etudiant parent
 
+    public Etudiant(long l, String sofien, String meddeb, long l1, String esprit, String mail) {
+        this.idEtudiant=l;
+        this.nomEt=sofien;
+        this.prenomEt=meddeb;
+        this.cin=l1;
+        this.ecole=esprit;
+        this.studentEmail=mail;
+        this.studentEmail=mail;
+    }
 }
