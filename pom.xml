@@ -176,7 +176,7 @@
         <repository>
             <id>deploymentRepo</id>
             <name>Nexus Repository</name>
-            <url>http://localhost:8081/repository/Esprit-Talents/</url>
+            <url>http://localhost:8081/repository/spring-release/</url>
         </repository>
     </distributionManagement>
 </project>
