@@ -22,6 +22,7 @@ scrape_configs:
     scrape_interval: 60s
     scrape_timeout: 1m
     static_configs:
-      - targets: ['localhost:8086']
+      - targets: ['192.168.10.128:8086']
         labels:
           application: 'SPRING'
+ 
